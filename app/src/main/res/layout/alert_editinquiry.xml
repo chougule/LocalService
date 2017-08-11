@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@android:color/white"
+    android:layout_marginBottom="5dp">
+
+    <LinearLayout
+        android:visibility="visible"
+        android:id="@+id/ll_inquiry_post"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Job Title"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_sub_subheasing"/>
+
+        <EditText
+            android:id="@+id/edt_edtinq_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="13dp"
+            android:textSize="@dimen/text_normal"
+            android:inputType="textCapWords"
+            android:background="@drawable/border"
+            android:textColor="@android:color/black"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".45"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="@dimen/text_sub_subheasing"
+                    android:textColor="@android:color/black"
+                    android:text="Priority"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/border">
+
+                    <Spinner
+                        android:id="@+id/spinpriority"
+                        android:layout_width="match_parent"
+                        android:layout_margin="1dp"
+                        android:layout_weight=".7"
+                        android:layout_marginTop="2dp"
+                        android:layout_height="48dp"/>
+
+                </LinearLayout>
+            </LinearLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".02"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".45"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="@dimen/text_sub_subheasing"
+                    android:textColor="@android:color/black"
+                    android:text="Budget"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:background="@drawable/border">
+
+                    <Spinner
+                        android:id="@+id/spineditbudget"
+                        android:layout_width="0dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_weight=".5"
+                        android:layout_marginTop="2dp"
+                        android:layout_height="48dp"/>
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight=".5"
+                        android:maxLength="6"
+                        android:background="@null"
+                        android:inputType="number"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/edt_edtbudgettext"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15dp"
+            android:textColor="@android:color/black"
+            android:text="Priority"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/border">
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/spin_editpriority"
+                android:layout_width="match_parent"
+                android:layout_marginRight="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginBottom="1dp"
+                android:layout_weight=".7"
+                app:ms_text_color="@android:color/black"
+                android:layout_marginTop="2dp"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"
+                android:textColor="@android:color/black"
+                android:text="Budget"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/border">
+
+                <com.jaredrummler.materialspinner.MaterialSpinner
+                    android:id="@+id/spin_editbudget"
+                    android:layout_width="0dp"
+                    android:layout_margin="1dp"
+                    android:layout_weight=".2"
+                    app:ms_text_color="@android:color/black"
+                    android:layout_marginTop="2dp"
+                    android:layout_height="50dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight=".5"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:background="@null"
+                    android:inputType="number"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edt_budgettext"/>
+
+            </LinearLayout>
+        </LinearLayout>-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textSize="@dimen/text_sub_subheasing"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/edt_edtinq_desc"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:padding="13dp"
+            android:textSize="@dimen/text_normal"
+            android:inputType="textCapWords|textMultiLine"
+            android:gravity="top"
+            android:background="@drawable/border"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/border">
+
+            <Button
+                android:id="@+id/btn_edtseldoc"
+                android:layout_width="0dp"
+                android:layout_weight=".4"
+                android:layout_height="wrap_content"
+                android:background="@color/gray"
+                android:text="Upload Document"
+                android:textSize="12dp"
+                android:layout_gravity="center"
+                android:textColor="@android:color/white"/>
+
+            <TextView
+                android:id="@+id/tv_edtinq_docname"
+                android:layout_width="0dp"
+                android:layout_weight=".4"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_edtinq_submit"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/green_roundcorner"
+            android:layout_marginLeft="20dp"
+            android:text="Submit"
+            android:textSize="@dimen/text_normal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+
+</ScrollView>

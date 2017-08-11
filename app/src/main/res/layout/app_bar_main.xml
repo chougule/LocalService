@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/appBarLayout">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:title="Services"
+            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recycle_service"
+        android:layout_above="@+id/fab_call"
+        android:paddingBottom="40dp"
+        android:visibility="visible"
+        android:clickable="false"
+        android:focusable="false"
+        android:layout_below="@+id/appBarLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+
+
+    <!--<com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/fabmenu_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="60dp"
+        android:visibility="gone"
+        android:layout_above="@+id/fab_call"
+        fab:menu_colorNormal="@android:color/holo_green_dark"
+        fab:fab_addButtonSize="normal"
+        app:fab_colorNormal="@android:color/white"
+        app:fab_addButtonColorNormal="@color/white"
+        fab:fab_labelStyle="@style/menu_labels_style"
+        fab:fab_labelsPosition="left">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_title="Message"
+            app:fab_label="Message"
+            fab:fab_size="normal"
+            fab:fab_icon="@drawable/message"
+            app:fab_colorNormal="@android:color/white"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_size="normal"
+            fab:fab_icon="@drawable/gmail"
+            fab:fab_title="Gmail"
+            app:fab_label="Gmail"
+            app:fab_colorNormal="@android:color/white"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_icon="@drawable/whatsapp"
+            fab:fab_size="normal"
+            fab:fab_title="WhatsApp"
+            app:fab_label="WhatsApp"
+            app:fab_colorNormal="@android:color/white"/>
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+    <com.getbase.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="60dp"
+        fab:fab_icon="@drawable/share"
+        app:fab_colorNormal="@android:color/white"/>-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rl_fab"
+        android:clickable="false">
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_main"
+        android:src="@drawable/share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="66dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="20dp"
+        app:elevation="6dp"
+        app:backgroundTint="@android:color/holo_green_dark"
+        app:pressedTranslationZ="12dp"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:visibility="invisible"
+        android:id="@+id/fab_whatsapp"
+        android:src="@drawable/whatsapp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/fab_main"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="20dp"
+        app:elevation="6dp"
+        app:backgroundTint="@color/white"
+        app:pressedTranslationZ="12dp"/>
+
+    <TextView
+        android:visibility="invisible"
+        android:id="@+id/tv_whatsapp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WhatsApp"
+        android:gravity="center"
+        android:background="@drawable/fab_label_background"
+        android:textColor="@android:color/black"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_above="@+id/fab_main"
+        android:layout_toLeftOf="@+id/fab_whatsapp"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:visibility="invisible"
+        android:id="@+id/fab_gmail"
+        android:src="@drawable/gmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/fab_whatsapp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="20dp"
+        app:elevation="6dp"
+        app:backgroundTint="@color/white"
+        app:pressedTranslationZ="12dp"/>
+
+    <TextView
+        android:visibility="invisible"
+        android:id="@+id/tv_gmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gmail"
+        android:gravity="center"
+        android:background="@drawable/fab_label_background"
+        android:textColor="@android:color/black"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_above="@+id/fab_whatsapp"
+        android:layout_toLeftOf="@+id/fab_gmail"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:visibility="invisible"
+        android:id="@+id/fab_message"
+        android:src="@drawable/message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/fab_gmail"
+        android:layout_marginRight="16dp"
+        app:elevation="6dp"
+        app:backgroundTint="@color/white"
+        app:pressedTranslationZ="12dp"/>
+    <TextView
+        android:visibility="invisible"
+        android:id="@+id/tv_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Message"
+        android:gravity="center"
+        android:background="@drawable/fab_label_background"
+        android:textColor="@android:color/black"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_above="@+id/fab_gmail"
+        android:layout_toLeftOf="@+id/fab_message"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/fab_call"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingTop="15dp"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_call_white_24dp"
+            android:layout_toLeftOf="@+id/tvcall"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"/>
+
+        <TextView
+            android:id="@+id/tvcall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Call"
+            android:layout_centerInParent="true"
+            android:textSize="@dimen/text_sub_subheasing"
+            android:textStyle="bold"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"/>
+    </RelativeLayout>
+
+</RelativeLayout>

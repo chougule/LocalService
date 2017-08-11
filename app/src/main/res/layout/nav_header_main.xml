@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:background="@drawable/side_nav_bar"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="25dp"
+        android:layout_gravity="top"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="190dp">
+    <TextView
+        android:id="@+id/iv_drawerinitial"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:text=""
+        android:gravity="center"
+        android:textSize="25dp"
+        android:layout_marginTop="28dp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/circle"/>
+
+    <TextView
+        android:id="@+id/tv_drawer_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingLeft="5dp"
+        android:textSize="@dimen/text_sub_subheasing"
+        android:text="Person Name"
+        android:textColor="@android:color/black"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+    <TextView
+        android:id="@+id/tv_drawer_useremail"
+        android:layout_width="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_sub_subheasing"
+        android:paddingLeft="5dp"
+        android:text="Email id"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/offer"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            />
+
+        <TextView
+            android:id="@+id/tvdraer_offer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Offers"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_sub_subheasing"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recycle_drawer">
+
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

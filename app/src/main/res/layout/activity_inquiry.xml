@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_above="@+id/fab_call">
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".1">
+
+        </TextView>
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight=".8"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:padding="3dp"
+        android:background="@drawable/roundcorner">
+
+        <Button
+            android:id="@+id/btn_inquiry_list"
+            android:layout_width="0dp"
+            android:layout_weight=".5"
+            android:layout_height="wrap_content"
+            android:text="List"
+            android:textSize="@dimen/text_subheasing"
+            android:padding="3dp"
+            style="?android:attr/borderlessButtonStyle"
+            android:background="@drawable/rounded_white"/>
+
+        <Button
+            android:id="@+id/btn_inquiry_post"
+            android:layout_width="0dp"
+            android:layout_weight=".5"
+            android:layout_height="wrap_content"
+            android:text="Post"
+            android:textSize="@dimen/text_subheasing"
+            style="?android:attr/borderlessButtonStyle"
+            android:background="@drawable/roundcorner_press"
+            android:padding="3dp" />
+    </LinearLayout>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".1">
+
+        </TextView>
+
+    </LinearLayout>
+
+        <View
+            android:id="@+id/view_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginLeft="25dp"
+            android:background="@color/gray">
+
+        </View>
+     <RelativeLayout
+         android:id="@+id/rl_inqlist"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:visibility="visible"
+         android:layout_marginBottom="50dp"
+         android:layout_marginTop="10dp">
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recycle_inquiry">
+
+    </android.support.v7.widget.RecyclerView>
+
+     </RelativeLayout>
+
+        <ScrollView
+            android:id="@+id/scroll_inquiry"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:isScrollContainer="false"
+            android:layout_marginBottom="50dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+
+        android:id="@+id/ll_inquiry_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_subheasing"
+            android:layout_gravity="center"
+            android:text="Post Your Requirement"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Job Title"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_sub_subheasing"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/edt_inqjobtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="13dp"
+            android:maxLength="25"
+            android:textSize="@dimen/text_normal"
+            android:inputType="textCapSentences"
+            android:background="@drawable/border"
+            android:textColor="@android:color/black"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".45"
+                android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="@dimen/text_sub_subheasing"
+                android:textColor="@android:color/black"
+                android:text="Priority"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/border">
+
+            <Spinner
+                android:id="@+id/spin_priority"
+                android:layout_width="match_parent"
+                android:layout_margin="1dp"
+                android:layout_weight=".7"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="2dp"
+                android:layout_height="48dp"/>
+
+            </LinearLayout>
+            </LinearLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".02"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".45"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:textSize="@dimen/text_sub_subheasing"
+                        android:textColor="@android:color/black"
+                        android:text="Budget"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:background="@drawable/border">
+
+                        <Spinner
+                            android:id="@+id/spin_currency"
+                            android:layout_width="0dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginBottom="1dp"
+                            android:layout_marginLeft="1dp"
+                            android:layout_weight=".5"
+                            android:layout_marginTop="2dp"
+                            android:layout_height="48dp"/>
+
+                        <EditText
+
+                            android:layout_width="0dp"
+                            android:layout_weight=".5"
+                            android:maxLength="6"
+                            android:background="@null"
+                            android:inputType="number"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/edt_budgettext"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textSize="@dimen/text_sub_subheasing"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/edt_inq_desc"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="top"
+            android:padding="13dp"
+            android:textSize="@dimen/text_normal"
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLength="210"
+            android:background="@drawable/border"/>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/border">
+
+        <Button
+            android:id="@+id/btn_seldoc"
+            android:layout_width="0dp"
+            android:layout_weight=".4"
+            android:layout_height="wrap_content"
+            android:background="@color/gray"
+            android:text="Upload Document"
+            android:textSize="@dimen/text_normal"
+            android:layout_gravity="center"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/tv_inq_docname"
+            android:layout_width="0dp"
+            android:layout_weight=".4"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="4dp"
+            android:textSize="@dimen/text_normal"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_inq_submit"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/green_roundcorner"
+            android:layout_marginTop="50dp"
+            android:text="Submit"
+            android:textSize="@dimen/text_normal"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="40dp"
+            android:textColor="@android:color/white"/>
+
+    </LinearLayout>
+        </RelativeLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_inquiry_call"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_call_white_24dp"
+            android:layout_toLeftOf="@+id/tvcall"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"/>
+        <TextView
+            android:id="@+id/tvcall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Call"
+            android:layout_centerInParent="true"
+            android:textSize="@dimen/text_sub_subheasing"
+            android:textStyle="bold"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"/>
+    </RelativeLayout>
+
+</RelativeLayout>

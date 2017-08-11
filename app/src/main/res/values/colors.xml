@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#618f5e</color>
+    <color name="skyblue">#FF8EC6ED</color>
+    <color name="darkskyblue">#77bae9</color>
+    <color name="skyblue_press">#9bcef2</color>
+    <color name="gray">#c5c7c9</color>
+    <color name="textcolorhint">#FF7BBA77</color>
+    <color name="white">#ffffff</color>
+    <color name="fab_background">#C0000000</color>
+</resources>
