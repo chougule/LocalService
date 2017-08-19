@@ -214,12 +214,9 @@ public class EditInquiry extends ActionBarActivity implements View.OnClickListen
 
                 if(utils.isNetworkAvailable()){
 
-                    SharedPreferences sharedpreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
-                    String user_id=sharedpreferences.getString("Id", Constants.MyPREFERENCES);
-
                     HashMap<String, String> postDataParams = new HashMap<>();
-                    postDataParams.put("user_id", user_id);
-                    postDataParams.put("service_id", postid);
+                    postDataParams.put("id", postid);
+                    //postDataParams.put("service_id", postid);
                     postDataParams.put("jobtitle", jobtitle.getText().toString().trim());
                     postDataParams.put("priority", priorityspinner.getSelectedItem().toString().trim());
                     postDataParams.put("bgt_icon", String.valueOf(budgetspinner.getSelectedItemPosition()));
@@ -252,11 +249,11 @@ public class EditInquiry extends ActionBarActivity implements View.OnClickListen
 
             edt_decription.setError("Please Enter Description");
             check=false;
-        }else if (tvdocname.getText().toString().length()<1){
+        }/*else if (tvdocname.getText().toString().length()<1){
 
             tvdocname.setError("Please Select Document");
             check=false;
-        }
+        }*/
 
         return check;
     }
@@ -404,7 +401,7 @@ public class EditInquiry extends ActionBarActivity implements View.OnClickListen
 
                 }if (status.equals("1")){
 
-                    StoreInquiryInLocal(PostDataParams);
+                    /*StoreInquiryInLocal(PostDataParams);*/
                     Toast.makeText(EditInquiry.this,message,Toast.LENGTH_SHORT).show();
                     finish();
                 }

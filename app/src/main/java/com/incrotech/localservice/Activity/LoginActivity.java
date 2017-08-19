@@ -144,9 +144,9 @@ public class LoginActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
 
-                if (isReadContactPermissionGranted()) {
+
                     LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile", "email", "user_friends"));
-                }
+
             }
         });
 
@@ -193,23 +193,6 @@ public class LoginActivity extends AppCompatActivity  {
         LoginManager.getInstance().logOut();
     }
 
-    public  boolean isReadContactPermissionGranted() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (checkSelfPermission(Manifest.permission.READ_CONTACTS)
-                    == PackageManager.PERMISSION_GRANTED) {
-                return true;
-            } else {
-
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, 3);
-                return false;
-            }
-        }
-        else {
-
-            return true;
-        }
-    }
-
     public void graphRequest(AccessToken token) {
         GraphRequest request = GraphRequest.newMeRequest(token, new GraphRequest.GraphJSONObjectCallback() {
 
@@ -217,8 +200,10 @@ public class LoginActivity extends AppCompatActivity  {
             public void onCompleted(JSONObject object, GraphResponse response) {
 
                 try {
-                    String firstName = "NA";
-                    String lastName = "NA";
+                    String firstName = "";
+                    String lastName = "";
+                    String stremail = "";
+                    String strmobile = "";
 
                     //URL profilePicture = new URL("https://graph.facebook.com/" + userId + "/picture?width=500&height=500");
                     if (object.has("first_name")) {
@@ -226,10 +211,12 @@ public class LoginActivity extends AppCompatActivity  {
                     }
                     if (object.has("last_name")) {
                         lastName = object.getString("last_name");
+                    }if (object.has("email")) {
+                        stremail = object.getString("email");
                     }
 
                     Name.setText(firstName+" "+lastName);
-                    email.setText(getEmiailID(LoginActivity.this));
+                    email.setText(stremail);
                     forgotpass.setVisibility(View.GONE);
                     fblogin.setVisibility(View.GONE);
 
@@ -318,7 +305,7 @@ public class LoginActivity extends AppCompatActivity  {
         protected  void onPreExecute(){
             super.onPreExecute();
 
-            progressBar.setCancelable(true);//you can cancel it by pressing back button
+            progressBar.setCancelable(true);
             progressBar.setMessage("Loading ...");
             progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progressBar.setProgress(0);//initially progress is 0
@@ -378,14 +365,14 @@ public class LoginActivity extends AppCompatActivity  {
                 progressBar.dismiss();
                 JSONObject jsonObject=new JSONObject(s);
                 String status=jsonObject.getString("status");
-                String message=jsonObject.getString("message");
+                String message=jsonObject.getString("validationStatus");
                 if (status.equals("0")){
 
                     Toast.makeText(LoginActivity.this,message,Toast.LENGTH_SHORT).show();
 
                 }if (status.equals("1")){
 
-                    Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,"Registration Successful",Toast.LENGTH_SHORT).show();
                     JSONArray data= jsonObject.getJSONArray("data");
                     JSONObject object=data.getJSONObject(0);
                     String id=object.getString("id");

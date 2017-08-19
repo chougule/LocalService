@@ -1,5 +1,6 @@
 package com.incrotech.localservice.Activity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -27,12 +28,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.incrotech.localservice.Adapter.Adapter_ServiceList;
 import com.incrotech.localservice.Adapter.DrawerServiceAdapter;
+import com.incrotech.localservice.Adapter.ServiceAdapter;
 import com.incrotech.localservice.R;
 import com.incrotech.localservice.Utils.Constants;
 import com.incrotech.localservice.Utils.Services;
@@ -60,9 +64,10 @@ import javax.net.ssl.HttpsURLConnection;
  * Created by jeet on 18/7/17.
  */
 
-public class ServiceListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
+public class ServiceListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener ,AdapterView.OnItemClickListener{
 
     RecyclerView recyclerView,drawer;
+    ListView lv_service;
     String TAG,Username,UserEmail,Advertise_No;
     ArrayList<Services> Servicelist;
     FloatingActionButton whatsapp,gmail,message,share;
@@ -117,7 +122,7 @@ public class ServiceListActivity extends AppCompatActivity implements Navigation
             gmail.setClickable(false);
             message.setClickable(false);
             isFabOpen = false;
-            recyclerView.setClickable(true);
+           // recyclerView.setClickable(true);
 
 
         }else {
@@ -126,7 +131,6 @@ public class ServiceListActivity extends AppCompatActivity implements Navigation
 
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -147,7 +151,7 @@ public class ServiceListActivity extends AppCompatActivity implements Navigation
         Username=sharedpreferences.getString("Name", Constants.MyPREFERENCES);
         UserEmail=sharedpreferences.getString("Email", Constants.MyPREFERENCES);
         Advertise_No=sharedpreferences.getString("Advertise_No", Constants.MyPREFERENCES);
-        recyclerView= (RecyclerView) findViewById(R.id.recycle_service);
+       // recyclerView= (RecyclerView) findViewById(R.id.recycle_service);
         call= (RelativeLayout) findViewById(R.id.fab_call);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -227,6 +231,7 @@ public class ServiceListActivity extends AppCompatActivity implements Navigation
         tv_whatsapp= (TextView) findViewById(R.id.tv_whatsapp);
         tv_message= (TextView) findViewById(R.id.tv_message);
         rl_fab= (RelativeLayout) findViewById(R.id.rl_fab);
+        lv_service= (ListView) findViewById(R.id.listview_service);
 
         fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
         fab_close = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_close);
@@ -238,8 +243,9 @@ public class ServiceListActivity extends AppCompatActivity implements Navigation
         whatsapp.setOnClickListener(this);
         gmail.setOnClickListener(this);
         message.setOnClickListener(this);
+        lv_service.setOnItemClickListener(this);
 
-        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+        /*recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             @Override
             public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
                 return false;
@@ -266,7 +272,7 @@ public class ServiceListActivity extends AppCompatActivity implements Navigation
             public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
 
             }
-        });
+        });*/
     }
 
     public void animateFAB(){
@@ -285,7 +291,9 @@ public class ServiceListActivity extends AppCompatActivity implements Navigation
             gmail.setClickable(false);
             message.setClickable(false);
             isFabOpen = false;
-            recyclerView.setClickable(true);
+            //lv_service.setClickable(true);
+           // lv_service.setEnabled(true);
+           // lv_service.setFocusable(true);
             Log.d("Raj", "close");
 
         } else {
@@ -301,12 +309,30 @@ public class ServiceListActivity extends AppCompatActivity implements Navigation
             whatsapp.setClickable(true);
             gmail.setClickable(true);
             message.setClickable(true);
-            recyclerView.setClickable(false);
-            recyclerView.setEnabled(false);
+
+           // lv_service.setClickable(false);
+           // lv_service.setEnabled(false);
+           // lv_service.setFocusable(false);
             isFabOpen = true;
             Log.d("Raj","open");
 
         }
+    }
+
+    public void CloseFab(){
+
+        rl_fab.setBackgroundColor(0x00000000);
+        share.startAnimation(rotate_backward);
+        whatsapp.startAnimation(fab_close);
+        gmail.startAnimation(fab_close);
+        message.startAnimation(fab_close);
+        tv_whatsapp.startAnimation(fab_close);
+        tv_gmail.startAnimation(fab_close);
+        tv_message.startAnimation(fab_close);
+        whatsapp.setClickable(false);
+        gmail.setClickable(false);
+        message.setClickable(false);
+        isFabOpen = false;
     }
 
     @Override
@@ -323,6 +349,7 @@ public class ServiceListActivity extends AppCompatActivity implements Navigation
             animateFAB();
         }
         if (whatsapp.getId()==id){
+            CloseFab();
             Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
             whatsappIntent.setType("text/plain");
             whatsappIntent.setPackage("com.whatsapp");
@@ -333,6 +360,7 @@ public class ServiceListActivity extends AppCompatActivity implements Navigation
                 Toast.makeText(ServiceListActivity.this,"Whatsapp have not been installed.",Toast.LENGTH_SHORT).show();
             }
         }if (gmail.getId()==id){
+            CloseFab();
             Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
             whatsappIntent.setType("text/plain");
             whatsappIntent.setPackage("com.google.android.gm");
@@ -343,6 +371,7 @@ public class ServiceListActivity extends AppCompatActivity implements Navigation
                 Toast.makeText(ServiceListActivity.this,"email have not been installed.",Toast.LENGTH_SHORT).show();
             }
         }if (message.getId()==id){
+            CloseFab();
             Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
             whatsappIntent.setType("text/plain");
             whatsappIntent.setPackage(getDefaultSmsAppPackageName(ServiceListActivity.this));
@@ -354,6 +383,7 @@ public class ServiceListActivity extends AppCompatActivity implements Navigation
             }
         }
         if (tv_whatsapp.getId()==id){
+            CloseFab();
             Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
             whatsappIntent.setType("text/plain");
             whatsappIntent.setPackage("com.whatsapp");
@@ -364,6 +394,7 @@ public class ServiceListActivity extends AppCompatActivity implements Navigation
                 Toast.makeText(ServiceListActivity.this,"Whatsapp have not been installed.",Toast.LENGTH_SHORT).show();
             }
         }if (tv_gmail.getId()==id){
+            CloseFab();
             Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
             whatsappIntent.setType("text/plain");
             whatsappIntent.setPackage("com.google.android.gm");
@@ -374,6 +405,7 @@ public class ServiceListActivity extends AppCompatActivity implements Navigation
                 Toast.makeText(ServiceListActivity.this,"email have not been installed.",Toast.LENGTH_SHORT).show();
             }
         }if (tv_message.getId()==id){
+            CloseFab();
             Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
             whatsappIntent.setType("text/plain");
             whatsappIntent.setPackage(getDefaultSmsAppPackageName(ServiceListActivity.this));
@@ -405,6 +437,22 @@ public class ServiceListActivity extends AppCompatActivity implements Navigation
                 return resolveInfos.get(0).activityInfo.packageName;
             return null;
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+        if(isFabOpen){
+
+            animateFAB();
+
+        }else {
+            Intent intent = new Intent(ServiceListActivity.this, InquiryActivity.class);
+            intent.putExtra("service_name", Servicelist.get(position).getName());
+            intent.putExtra("service_id",Servicelist.get(position).getId());
+            startActivity(intent);
+        }
+
     }
 
     class ValidateUser extends AsyncTask<String,Void,String> {
@@ -603,11 +651,13 @@ public class ServiceListActivity extends AppCompatActivity implements Navigation
                         Servicelist.add(services);
                     }
 
-                    Adapter_ServiceList adapter = new Adapter_ServiceList(ServiceListActivity.this,Servicelist);
-                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                    ServiceAdapter adapter = new ServiceAdapter(ServiceListActivity.this,Servicelist);
+                   /* RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
                     recyclerView.setLayoutManager(mLayoutManager);
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
-                    recyclerView.setAdapter(adapter);
+                    recyclerView.setAdapter(adapter);*/
+
+                    lv_service.setAdapter(adapter);
                 }else {
                     Intent intent=new Intent(ServiceListActivity.this,AlertActivity.class);
                     intent.putExtra("type","no products");

@@ -52,6 +52,10 @@ public class InquryAdapter extends RecyclerView.Adapter<InquryAdapter.ViewHolder
         holder.priority.setText(InquiryList.get(position).getPriority());
         holder.description.setText(InquiryList.get(position).getDescription());
         holder.date.setText(InquiryList.get(position).getDate());
+        if (!InquiryList.get(position).getStatus().equals("")){
+
+            holder.notification.setImageDrawable(context.getResources().getDrawable(R.mipmap.notification));
+        }
 
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,10 +89,28 @@ public class InquryAdapter extends RecyclerView.Adapter<InquryAdapter.ViewHolder
 
         Button edit=alertLayout.findViewById(R.id.btn_alertview_edit);
         ImageView cancel=alertLayout.findViewById(R.id.iv_niewinq_close);
+        TextView budget=alertLayout.findViewById(R.id.tv_viewinq_budget);
         TextView name=alertLayout.findViewById(R.id.tv_viewinq_name);
         TextView desc=alertLayout.findViewById(R.id.tv_viewinq_desc);
         TextView priority=alertLayout.findViewById(R.id.tv_viewinq_priority);
         TextView date=alertLayout.findViewById(R.id.tv_viewinq_date);
+
+        if (InquiryList.get(position).getBudget_icon().equals("0")){
+
+            budget.setText(context.getResources().getString(R.string.dollar)+" "+InquiryList.get(position).getBudget());
+
+        }else if (InquiryList.get(position).getBudget_icon().equals("0")){
+
+            budget.setText(context.getResources().getString(R.string.Rs)+" "+InquiryList.get(position).getBudget());
+        }
+        else if (InquiryList.get(position).getBudget_icon().equals("0")){
+
+            budget.setText(context.getResources().getString(R.string.pound)+" "+InquiryList.get(position).getBudget());
+        }
+        else if (InquiryList.get(position).getBudget_icon().equals("0")){
+
+            budget.setText(context.getResources().getString(R.string.euro)+" "+InquiryList.get(position).getBudget());
+        }
 
         name.setText(InquiryList.get(position).getTitle());
         desc.setText(InquiryList.get(position).getDescription());

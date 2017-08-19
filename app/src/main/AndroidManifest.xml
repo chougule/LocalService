@@ -49,6 +49,8 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:label="">
 
+
+
         </activity>
         <activity android:name=".Activity.InquiryActivity"
             android:fitsSystemWindows="true"

@@ -14,6 +14,7 @@ public class Inquiry {
     private String budget_icon="";
     private String date;
     private String file = "";
+    private String status  ="";
 
 
     public String getId() {
@@ -78,5 +79,13 @@ public class Inquiry {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

@@ -78,7 +78,7 @@ public class InquiryActivity extends ActionBarActivity implements View.OnClickLi
     Utils utils;
     String TAG="InquiryActivity";
     ArrayList<String> currency;
-    String service_name;
+    String service_name,service_id;
     SQLiteDatabase db;
     DBHelper helper;
     @Override
@@ -95,17 +95,17 @@ public class InquiryActivity extends ActionBarActivity implements View.OnClickLi
         currency.add(getResources().getString(R.string.euro));
         Intent intent=getIntent();
         if (intent!=null){
+
             service_name=intent.getStringExtra("service_name");
+            service_id=intent.getStringExtra("service_id");
         }
         init();
-
-        recyclerView= (RecyclerView) findViewById(R.id.recycle_inquiry);
-        InquryAdapter adapter = new InquryAdapter(InquiryActivity.this,GetInquiry());
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
-        //new GetInquiryList().execute();
+        SharedPreferences sharedpreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
+        String user_id=sharedpreferences.getString("Id", Constants.MyPREFERENCES);
+        HashMap<String, String> postDataParams=new HashMap<>();
+        postDataParams.put("service_id",service_id);
+        postDataParams.put("user_id",user_id);
+        new GetInquiryList(postDataParams).execute();
     }
 
     @Override
@@ -121,12 +121,13 @@ public class InquiryActivity extends ActionBarActivity implements View.OnClickLi
 
         if (recyclerView.getVisibility()==View.VISIBLE){
 
-            recyclerView= (RecyclerView) findViewById(R.id.recycle_inquiry);
-            InquryAdapter adapter = new InquryAdapter(InquiryActivity.this,GetInquiry());
-            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-            recyclerView.setLayoutManager(mLayoutManager);
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(adapter);
+            SharedPreferences sharedpreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
+            String user_id=sharedpreferences.getString("Id", Constants.MyPREFERENCES);
+            HashMap<String, String> postDataParams=new HashMap<>();
+            postDataParams.put("service_id",service_id);
+            postDataParams.put("user_id",user_id);
+            new GetInquiryList(postDataParams).execute();
+
         }
     }
 
@@ -257,12 +258,12 @@ public class InquiryActivity extends ActionBarActivity implements View.OnClickLi
             scrollView.setVisibility(View.GONE);
             line.setVisibility(View.VISIBLE);
 
-            recyclerView= (RecyclerView) findViewById(R.id.recycle_inquiry);
+           /* recyclerView= (RecyclerView) findViewById(R.id.recycle_inquiry);
             InquryAdapter adapter = new InquryAdapter(InquiryActivity.this,GetInquiry());
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(adapter);
+            recyclerView.setAdapter(adapter);*/
 
         }else if(id==post.getId()){
 
@@ -291,7 +292,7 @@ public class InquiryActivity extends ActionBarActivity implements View.OnClickLi
 
                     HashMap<String, String> postDataParams = new HashMap<>();
                     postDataParams.put("user_id", user_id);
-                    postDataParams.put("service_id", "1");
+                    postDataParams.put("service_id", service_id);
                     postDataParams.put("jobtitle", jobtitle.getText().toString().trim());
                     postDataParams.put("priority", priorityspinner.getSelectedItem().toString().trim());
                     postDataParams.put("bgt_icon", String.valueOf(budgetspinner.getSelectedItemPosition()));
@@ -324,11 +325,11 @@ public class InquiryActivity extends ActionBarActivity implements View.OnClickLi
 
             edt_decription.setError("Please Enter Description");
             check=false;
-        }else if (tvdocname.getText().toString().length()<1){
+        }/*else if (tvdocname.getText().toString().length()<1){
 
             tvdocname.setError("Please Select Document");
             check=false;
-        }
+        }*/
 
         return check;
     }
@@ -402,7 +403,8 @@ public class InquiryActivity extends ActionBarActivity implements View.OnClickLi
         String requestURL= Constants.URL+"ws_inquiry_list.php";
         HashMap<String, String> postDataParams;
 
-        public GetInquiryList() {
+        public GetInquiryList(HashMap<String, String> postDataParams) {
+            this.postDataParams=postDataParams;
             progressBar = new ProgressDialog(InquiryActivity.this);
         }
 
@@ -436,7 +438,7 @@ public class InquiryActivity extends ActionBarActivity implements View.OnClickLi
                 OutputStream os = conn.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(
                         new OutputStreamWriter(os, "UTF-8"));
-                writer.write(""/*utils.getPostDataString(postDataParams)*/);
+                writer.write(utils.getPostDataString(postDataParams));
 
                 writer.flush();
                 writer.close();
@@ -473,6 +475,10 @@ public class InquiryActivity extends ActionBarActivity implements View.OnClickLi
                 String message=jsonObject.getString("message");
                 if (status.equals("0")){
 
+                    line.setVisibility(View.GONE);
+                    TextView noinq= (TextView) findViewById(R.id.tv_noinq);
+                    noinq.setVisibility(View.VISIBLE);
+
                 }if (status.equals("1")){
                     ArrayList<Inquiry> ListInquiry = new ArrayList<Inquiry>();
                     JSONArray data= jsonObject.getJSONArray("data");
@@ -481,6 +487,7 @@ public class InquiryActivity extends ActionBarActivity implements View.OnClickLi
                         JSONObject object=data.getJSONObject(i);
 
                         Inquiry inquiry=new Inquiry();
+                        inquiry.setId(object.getString("id"));
                         inquiry.setTitle(object.getString("jobtitle"));
                         inquiry.setPriority(object.getString("priority"));
                         inquiry.setBudget(object.getString("budget"));
@@ -488,10 +495,23 @@ public class InquiryActivity extends ActionBarActivity implements View.OnClickLi
                         inquiry.setDescription(object.getString("description"));
                         inquiry.setFile(object.getString("files").replace("[","").replace("]","").replace("\"",""));
                         inquiry.setDate(object.getString("date"));
+                        inquiry.setStatus(object.getString("status"));
 
                         ListInquiry.add(inquiry);
 
                     }
+                    TextView noinq ;
+                    if (ListInquiry.size()==0)
+                    {
+                        line.setVisibility(View.GONE);
+                        noinq= (TextView) findViewById(R.id.tv_noinq);
+                        noinq.setVisibility(View.VISIBLE);
+                    }else {
+                        line.setVisibility(View.VISIBLE);
+                        noinq= (TextView) findViewById(R.id.tv_noinq);
+                        noinq.setVisibility(View.GONE);
+                    }
+
                     recyclerView= (RecyclerView) findViewById(R.id.recycle_inquiry);
                     InquryAdapter adapter = new InquryAdapter(InquiryActivity.this,ListInquiry);
                     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -592,7 +612,7 @@ public class InquiryActivity extends ActionBarActivity implements View.OnClickLi
 
                     PostDataParams.put("Post_id",post_id);
                     Toast.makeText(InquiryActivity.this,message,Toast.LENGTH_SHORT).show();
-                    StoreInquiryInLocal(PostDataParams);
+                //    StoreInquiryInLocal(PostDataParams);
                     ClearScreen();
                     OpenList();
                 }
@@ -611,12 +631,13 @@ public class InquiryActivity extends ActionBarActivity implements View.OnClickLi
         scrollView.setVisibility(View.GONE);
         line.setVisibility(View.VISIBLE);
 
-        recyclerView= (RecyclerView) findViewById(R.id.recycle_inquiry);
-        InquryAdapter adapter = new InquryAdapter(InquiryActivity.this,GetInquiry());
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
+        SharedPreferences sharedpreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
+        String user_id=sharedpreferences.getString("Id", Constants.MyPREFERENCES);
+        HashMap<String, String> postDataParams=new HashMap<>();
+        postDataParams.put("service_id",service_id);
+        postDataParams.put("user_id",user_id);
+        new GetInquiryList(postDataParams).execute();
+
     }
 
     private void ClearScreen() {
@@ -630,7 +651,7 @@ public class InquiryActivity extends ActionBarActivity implements View.OnClickLi
 
     }
 
-    private ArrayList<Inquiry> GetInquiry(){
+   /* private ArrayList<Inquiry> GetInquiry(){
         ArrayList<Inquiry> ListInquiry=new ArrayList<>();
 
         String query="Select * from Local_Services";
@@ -674,6 +695,6 @@ public class InquiryActivity extends ActionBarActivity implements View.OnClickLi
 
         long a=db.insert("Local_Services",null,cv);
         Log.d(TAG+"CV",String.valueOf(a));
-    }
+    }*/
 }
 
